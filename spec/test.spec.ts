@@ -1,9 +1,13 @@
 
 console.log("before import");
-import * as wasm from '../target/pkg'
 
-console.log("after import");
+let wasm : typeof import('../target/pkg');
+
 describe("test", function () {
+    before(async function () {
+        wasm = await import('../target/pkg');
+        console.log("after import");
+    });
     it("should be ok", function () {
         console.log("test 1");
         expect(wasm.get_color()).to.be("#F5D742");
@@ -13,4 +17,5 @@ describe("test", function () {
         expect(1).to.be(1);
     })
 })
+
 console.log("end of file");
